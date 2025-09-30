@@ -61,6 +61,8 @@ type Options struct {
 	Prefix           string
 	ServerPathFormat string
 	ClientPathFormat string
+	Username         string
+	Password         string
 	Timeout          time.Duration
 	LoggerConfig     *zap.Config
 	ConfigParser     ConfigParser
@@ -91,6 +93,8 @@ func NewClient(opts Options) (Client, error) {
 	etcdClient, err := clientv3.New(clientv3.Config{
 		Endpoints: opts.Node,
 		LogConfig: opts.LoggerConfig,
+		Username:  opts.Username,
+		Password:  opts.Password,
 	})
 	if err != nil {
 		return nil, err
